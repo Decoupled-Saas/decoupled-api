@@ -1,5 +1,7 @@
-const rateLimit = require('express-rate-limit');
-const { env } = require('../utils/envConfig');
+import type { Request } from 'express';
+import { rateLimit } from 'express-rate-limit';
+
+import { env } from '@/common/utils/envConfig';
 
 const rateLimiter = rateLimit({
   legacyHeaders: true,
@@ -7,7 +9,7 @@ const rateLimiter = rateLimit({
   message: 'Too many requests, please try again later.',
   standardHeaders: true,
   windowMs: 15 * 60 * env.COMMON_RATE_LIMIT_WINDOW_MS,
-  keyGenerator: (req) => req.ip
+  keyGenerator: (req: Request) => req.ip as string
 });
 
-module.exports = rateLimiter;
+export default rateLimiter;

@@ -29,7 +29,7 @@ services:
     restart: always
     image: sosedoff/pgweb
     ports:
-      - "8081:8081"
+      - '8081:8081'
     links:
       - postgres:postgres
     env_file: .env
@@ -38,5 +38,14 @@ services:
     depends_on:
       - postgres
 
+  rabbitmq:
+    image: rabbitmq
+    ports:
+      - 5672:5672
+      - 8080:15672
+    volumes:
+      - rabbit-data:/var/lib/rabbitmq
+
 volumes:
-  dbdata: {}
+  dbdata:
+  rabbit-data:

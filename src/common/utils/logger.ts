@@ -1,14 +1,16 @@
-const appRoot = require('app-root-path');
-const winston = require('winston');
-const Sequelize = require('sequelize');
+import winston from 'winston';
+import appRoot from 'app-root-path';
+import { Sequelize } from 'sequelize';
+// @ts-ignore
+import WinstonTransportSequelize from 'winston-transport-sequelize';
 // eslint-disable-next-line import/no-extraneous-dependencies
-const WinstonTransportSequelize = require('winston-transport-sequelize');
 
 // eslint-disable-next-line import/no-dynamic-require
-const config = require(`${__dirname}/../libs/db.js`)[process.env.NODE_ENV || 'development'];
+const config = require('@/libs/db.js')[process.env.NODE_ENV || 'development'];
 
 let sequelize;
 if (config.use_env_variable) {
+  // @ts-ignore
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
@@ -20,6 +22,7 @@ const sequelizeOptions = {
   sequelize,
   tableName: 'WinstonLog',
   meta: { project: 'decoupled' },
+  // @ts-ignore
   fields: { meta: Sequelize.JSONB },
   modelOptions: { timestamps: true }
 };
@@ -46,6 +49,7 @@ const options = {
 };
 
 // eslint-disable-next-line new-cap
+// @ts-ignore
 const logger = new winston.createLogger({
   transports: [
     new WinstonTransportSequelize(sequelizeOptions),
@@ -57,6 +61,7 @@ const logger = new winston.createLogger({
 });
 
 logger.stream = {
+  // @ts-ignore
   write: (message, encoding) => {
     logger.info(message.toString(encoding));
   }
@@ -64,4 +69,4 @@ logger.stream = {
 
 sequelize.sync();
 
-module.exports = logger;
+export { logger };

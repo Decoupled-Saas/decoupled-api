@@ -19,7 +19,12 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'Jwt',
-      underscored: true
+      underscored: true,
+      freezeTableName: true,
+      paranoid: true,
+      createdAt: 'created_at',
+      updatedAt: 'updated_at',
+      deletedAt: 'deleted_at',
     }
   );
   return Jwt;

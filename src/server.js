@@ -8,7 +8,7 @@ const { StatusCodes } = require('http-status-codes');
 const logger = require('./utils/logger');
 const { env } = require('./utils/envConfig');
 const rateLimiter = require('./middleware/rateLimiter');
-// const errorHandler = require('./middleware/errorHandler');
+const errorHandler = require('./middleware/errorHandler');
 const { handleServiceResponse } = require('./utils/httpHandlers');
 const ServiceResponse = require('./utils/serviceResponse');
 
@@ -39,5 +39,7 @@ app.get('/', (req, res) => {
   const serviceResponse = ServiceResponse.success(healthCheck, null, StatusCodes.OK);
   return handleServiceResponse(serviceResponse, res);
 });
+
+app.use(errorHandler());
 
 module.exports = { app, logger };

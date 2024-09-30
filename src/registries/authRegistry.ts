@@ -2,9 +2,9 @@ import { OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
 import { AuthSchema, CreateUserSchema } from '@/schemas/authSchema';
 import { createApiResponse } from '@/api-docs/openAPIResponseBuilders';
 
-export const authRegistry = new OpenAPIRegistry()
+export const authRegistry = new OpenAPIRegistry();
 
-authRegistry.register("Auth", AuthSchema)
+authRegistry.register('Auth', AuthSchema);
 authRegistry.registerPath({
   method: 'post',
   path: '/auth/register',
@@ -12,11 +12,11 @@ authRegistry.registerPath({
   request: {
     body: {
       content: {
-        "application/json": {
-          schema: CreateUserSchema,
+        'application/json': {
+          schema: CreateUserSchema
         }
       }
     }
   },
-  responses: createApiResponse(AuthSchema, "Success")
-})
+  responses: createApiResponse(AuthSchema, 'Success')
+});

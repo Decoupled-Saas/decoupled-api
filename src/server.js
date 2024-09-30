@@ -7,10 +7,10 @@ const { StatusCodes } = require('http-status-codes');
 
 const logger = require('./utils/logger');
 const { env } = require('./utils/envConfig');
-// const rateLimiter = require('./middleware/rateLimiter');
+const rateLimiter = require('./middleware/rateLimiter');
 // const errorHandler = require('./middleware/errorHandler');
-// const { handleServiceResponse } = require('./utils/httpHandlers');
-// const ServiceResponse = require('./utils/serviceResponse');
+const { handleServiceResponse } = require('./utils/httpHandlers');
+const ServiceResponse = require('./utils/serviceResponse');
 
 const corsOptions = {
   origin: env.CORS_ORIGIN,
@@ -27,4 +27,17 @@ app.use(compression());
 app.use(cors(corsOptions));
 app.use(helmet());
 
-module.exports = {app, logger}
+app.use(rateLimiter);
+
+app.get('/', (req, res) => {
+  const healthCheck = {
+    uptime: process.uptime(),
+    version: process.env.npm_package_version,
+    apiDocs: '/api/latest/docs',
+    swaggerFile: '/api/latest/docs/swagger.json'
+  };
+  const serviceResponse = ServiceResponse.success(healthCheck, null, StatusCodes.OK);
+  return handleServiceResponse(serviceResponse, res);
+});
+
+module.exports = { app, logger };

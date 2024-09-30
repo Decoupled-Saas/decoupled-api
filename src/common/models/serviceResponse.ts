@@ -1,5 +1,5 @@
-import { StatusCodes } from "http-status-codes";
-import { z } from "zod";
+import { StatusCodes } from 'http-status-codes';
+import { z } from 'zod';
 
 export class ServiceResponse<T = null> {
   readonly success: boolean;
@@ -28,5 +28,5 @@ export const ServiceResponseSchema = <T extends z.ZodTypeAny>(dataSchema: T) =>
     success: z.boolean(),
     message: z.string(),
     responseObject: dataSchema.optional(),
-    statusCode: z.number(),
+    statusCode: z.number()
   });

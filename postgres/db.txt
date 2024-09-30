@@ -1,8 +1,9 @@
 yarn mig:gen Jwt --attributes access_key:json,refresh_key:json
+yarn mig:gen Roles --attributes name:string,description:string
+
 yarn mig:gen Plans --attributes name:string,stripe_id:string,price:float,interval:enum,currency:json,features:json,options:json
 yarn mig:gen Organisations --attributes name:string,primary_email:string,active:boolean
 yarn mig:gen Subscriptions --attributes plan_id:uuid,organisation_id:uuid,stripe_customer_id:string,stripe_subscription_id:string
-yarn mig:gen Roles --attributes name:string,description:string
 yarn mig:gen Permissions --attributes name:string,description:string
 yarn mig:gen RolePermissions --attributes role_id:uuid,permission_id:uuid
 yarn mig:gen Users --attributes first_name:string,last_name:string,email:string,password:string,last_login_at:date,last_ip_address:string,mfa_enabled:boolean,mfa_secret:text,mfa_backup_code:text,active:boolean,default_organisation:uuid,phone:string,email_verification_code:string,email_verification_code_sent_at:date,email_verified:boolean,avatar_url:string

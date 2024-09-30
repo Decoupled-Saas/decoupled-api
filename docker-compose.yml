@@ -42,7 +42,7 @@ services:
     image: rabbitmq
     ports:
       - 5672:5672
-      - 8080:15672
+      - 15672:15672
     volumes:
       - rabbit-data:/var/lib/rabbitmq
 

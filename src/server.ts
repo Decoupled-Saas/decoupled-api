@@ -6,7 +6,7 @@ import morgan from 'morgan';
 import errorHandler from '@/common/middleware/errorHandler';
 import rateLimiter from '@/common/middleware/rateLimiter';
 import { env } from '@/common/utils/envConfig';
-import routes from '@/routes'
+import routes from '@/routes';
 
 const app: Express = express();
 const morganFormat = ':method :url :status :res[content-length] - :response-time ms'; // Customize format
@@ -26,6 +26,6 @@ app.get('/', (req, res) => {
   res.redirect('/api/latest/docs');
 });
 
-app.use('/api',routes);
+app.use('/api', routes);
 app.use(errorHandler());
 export { app, logger };

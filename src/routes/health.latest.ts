@@ -4,9 +4,9 @@ import { handleServiceResponse } from '@/common/utils/httpHandlers';
 
 const healthCheckRouter = Router();
 
-healthCheckRouter.get("/", (_req: Request, res: Response) => {
-  const serviceResponse = ServiceResponse.success("Service is healthy", null);
+healthCheckRouter.get('/', (_req: Request, res: Response) => {
+  const serviceResponse = ServiceResponse.success('Service is healthy', null);
   return handleServiceResponse(serviceResponse, res);
 });
 
-export default healthCheckRouter
+export default healthCheckRouter;

@@ -14,3 +14,7 @@ export const iamRoleSchema = z.object({
   name: z.string().openapi({ example: 'test' }),
   description: z.string().openapi({ example: 'Test role' })
 });
+
+export const iamRoleDeleteSchema = z.object({
+  name: z.string().openapi({ example: 'test' })
+});

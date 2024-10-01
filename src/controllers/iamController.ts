@@ -38,6 +38,14 @@ class IamController {
     );
     return handleServiceResponse(serviceResponse, res);
   }
+
+  async deleteRole(req: Request, res: Response) {
+    const data = dataValidator(req, res);
+    logger.info(`Deleting Role name: ${data.name}`);
+    await rolesService.deleteRole(data.name);
+    const serviceResponse = ServiceResponse.success('Role Deleted', null, StatusCodes.OK);
+    return handleServiceResponse(serviceResponse, res);
+  }
 }
 
 export const iamController = new IamController();

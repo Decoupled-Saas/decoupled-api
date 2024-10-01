@@ -13,7 +13,8 @@ class RolesService {
 
   deleteRole(name: string) {
     logger.info('deleteRole: ', name);
-    return db('Roles').delete().where({ name });
+    logger.info(db('Roles').delete().where({ name: name }).toQuery());
+    return db('Roles').delete().where({ name: name });
   }
 
   createRole(name: string, description: string) {

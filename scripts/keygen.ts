@@ -1,8 +1,8 @@
-import { JWK } from 'node-jose'
-import {knex} from 'knex'
-import * as knexFile from '../knexfile'
-import * as dotenv from 'dotenv'
-dotenv.config()
+import { JWK } from 'node-jose';
+import { knex } from 'knex';
+import * as knexFile from '../knexfile';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 const env = process.env.NODE_ENV || 'development';
 // @ts-ignore
@@ -17,16 +17,18 @@ async function main() {
   const accessKey = await accessKeyStore.generate('RSA', 2048, { alg: 'RS256', use: 'sig' });
   const refreshKey = await refreshKeyStore.generate('RSA', 2048, { alg: 'RS256', use: 'sig' });
 
-  await db("JWT").insert({access_key: accessKey, refresh_key: refreshKey});
+  await db('JWT').insert({ access_key: accessKey, refresh_key: refreshKey });
 
   // eslint-disable-next-line no-console
   console.log(accessKey.toJSON());
   console.log(refreshKey.toJSON());
 }
 
- main().then(() => {
-   process.exit(0)
- }).catch((err) => {
-   console.log(err)
-   process.exit(1);
- });
+main()
+  .then(() => {
+    process.exit(0);
+  })
+  .catch((err) => {
+    console.log(err);
+    process.exit(1);
+  });

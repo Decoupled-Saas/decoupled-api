@@ -3,7 +3,6 @@ import appRoot from 'app-root-path';
 
 const { combine, timestamp, json, colorize, simple } = winston.format;
 
-
 const options = {
   level: 'debug',
   format: combine(timestamp(), json()),
@@ -42,6 +41,5 @@ logger.stream = {
     logger.info(message.toString(encoding));
   }
 };
-
 
 export { logger };

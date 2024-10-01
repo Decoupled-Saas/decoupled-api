@@ -1,6 +1,6 @@
 import { JWK } from 'node-jose';
 import { knex } from 'knex';
-import * as knexFile from '../knexfile';
+import knexFile from '../knexfile';
 import * as dotenv from 'dotenv';
 dotenv.config();
 

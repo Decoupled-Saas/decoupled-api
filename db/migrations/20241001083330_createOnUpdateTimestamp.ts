@@ -4,11 +4,11 @@ const ON_UPDATE_TIMESTAMP_FUNCTION = `
   CREATE OR REPLACE FUNCTION on_update_timestamp()
   RETURNS trigger AS $$
   BEGIN
-    NEW."updatedAt" = now();
+    NEW."updated_at" = now();
 
     IF (NEW.active = false) THEN
-      NEW."updatedAt" = OLD."updatedAt";
-      NEW."deletedAt" = now();
+      NEW."updated_at" = OLD."updated_at";
+      NEW."updated_at" = now();
     END IF;
 
     RETURN NEW;

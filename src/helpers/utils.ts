@@ -1,4 +1,4 @@
-import  {type Knex, type TableBuilder } from 'knex';
+import { type Knex, type TableBuilder } from 'knex';
 
 export const createOnUpdateTrigger = (tableName: string) => `
   CREATE TRIGGER "${tableName}_updated_at"

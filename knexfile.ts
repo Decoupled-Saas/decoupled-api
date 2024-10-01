@@ -20,7 +20,7 @@ const config: { [key: string]: Knex.Config } = {
     migrations: {
       tableName: 'knex_migrations',
       directory: './db/migrations',
-      stub: './db/stub/migration.stub',
+      stub: './db/stub/migrations.stub'
     },
     seeds: {
       directory: './db/seeds'
@@ -37,7 +37,8 @@ const config: { [key: string]: Knex.Config } = {
     migrations: {
       extension: 'ts',
       tableName: 'knex_migrations',
-      directory: './data/migrations'
+      directory: './data/migrations',
+      stub: './db/stub/migrations.stub'
     },
     seeds: {
       extension: 'ts',

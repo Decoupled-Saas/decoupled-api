@@ -1,4 +1,4 @@
-import cache from "express-redis-cache";
+import cache from 'express-redis-cache';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -7,7 +7,7 @@ const redis = cache({
   port: process.env.REDIS_PORT,
   // auth_pass: process.env.REDIS_PASSWORD,
   expire: Number(process.env.REDIS_EXPIRE),
-  prefix: process.env.NODE_ENV,
-})
+  prefix: process.env.NODE_ENV
+});
 
-export default redis
+export default redis;

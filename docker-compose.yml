@@ -40,14 +40,13 @@ services:
 
   redis-1:
     image: redis:latest
-    command: ["redis-server","/etc/redis/redis.conf"]
+    command: ['redis-server', '/etc/redis/redis.conf']
     ports:
       - 6379:6379
       - 16379:16379
     volumes:
       - redis-data:/root/redis
       - ./redis/node-1/conf/redis.conf:/etc/redis/redis.conf
-
 
 volumes:
   db-data:

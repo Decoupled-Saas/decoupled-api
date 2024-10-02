@@ -1,5 +1,5 @@
-import db from '../common/utils/db';
-import { logger } from '@/server';
+import db from '@/common/utils/db';
+import { logger } from '@/common/utils/logger';
 
 class RolesService {
   getAll() {

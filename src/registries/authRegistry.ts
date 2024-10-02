@@ -1,5 +1,5 @@
 import { OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
-import { AuthSchema, CreateUserSchema } from '@/schemas/authSchema';
+import { AuthRegisterSchema, AuthSchema } from '@/schemas/authSchema';
 import { createApiResponse } from '@/api-docs/openAPIResponseBuilders';
 
 export const authRegistry = new OpenAPIRegistry();
@@ -19,7 +19,7 @@ authRegistry.registerPath({
     body: {
       content: {
         'application/json': {
-          schema: CreateUserSchema
+          schema: AuthRegisterSchema
         }
       }
     }

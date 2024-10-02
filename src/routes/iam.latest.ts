@@ -5,10 +5,11 @@ import { validateRequest } from '@/common/utils/httpHandlers';
 import { iamCreateRoleSchema } from '@/schemas/iamSchema';
 import { checkDescription, checkName } from '@/validators/iamValidator';
 import redis from '@/common/utils/redis';
+import { auth } from '@/common/middleware/auth';
 
 const iamRouter = Router();
 
-iamRouter.get('/roles', redis.route(), wrapper(iamController.getRoles));
+iamRouter.get('/roles', auth('role_get_all'), redis.route(), wrapper(iamController.getRoles));
 iamRouter.post(
   '/roles',
   validateRequest(iamCreateRoleSchema),

@@ -13,7 +13,7 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - dbdata:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql/data
 
   mailpit:
     image: axllent/mailpit
@@ -38,14 +38,17 @@ services:
     depends_on:
       - postgres
 
-  rabbitmq:
-    image: rabbitmq
+  redis-1:
+    image: redis:latest
+    command: ["redis-server","/etc/redis/redis.conf"]
     ports:
-      - 5672:5672
-      - 15672:15672
+      - 6379:6379
+      - 16379:16379
     volumes:
-      - rabbit-data:/var/lib/rabbitmq
+      - redis-data:/root/redis
+      - ./redis/node-1/conf/redis.conf:/etc/redis/redis.conf
+
 
 volumes:
-  dbdata:
-  rabbit-data:
+  db-data:
+  redis-data:

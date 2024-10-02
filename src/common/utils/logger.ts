@@ -1,11 +1,13 @@
 import winston from 'winston';
 import appRoot from 'app-root-path';
 
-const { combine, timestamp, json, colorize, simple } = winston.format;
-
+const { combine, timestamp, printf, colorize, simple } = winston.format;
+const formatMessage = (info: any) => `${info.level} ${info.message}`;
+const formatError = (info: any) => `${info.level} ${info.message}\n\n${info.stack}\n`;
+const fmt = (info: any) => info instanceof Error ? formatError(info) : formatMessage(info);
 const options = {
   level: 'debug',
-  format: combine(timestamp(), json()),
+  format: combine(timestamp(), printf(fmt)),
   file: {
     level: 'info',
     filename: `${appRoot}/logs/decoupled.log`,
@@ -19,7 +21,7 @@ const options = {
     level: 'debug',
     format: combine(colorize({ all: true }), simple()),
     handleExceptions: true,
-    json: true,
+    json: false,
     colorize: true
   }
 };

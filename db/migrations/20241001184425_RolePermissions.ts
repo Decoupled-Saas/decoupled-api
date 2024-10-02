@@ -1,7 +1,7 @@
-import type { Knex } from "knex";
+import type { Knex } from 'knex';
 import { createOnUpdateTrigger, defaultHistoryFields, deleteOnUpdateTrigger } from '../../src/helpers/utils';
 
-const tableName = "RolePermissions";
+const tableName = 'RolePermissions';
 
 export async function up(knex: Knex): Promise<void> {
   await knex.schema.createTable(tableName, (table) => {
@@ -9,13 +9,11 @@ export async function up(knex: Knex): Promise<void> {
     table.uuid('role_id').references('id').inTable('Roles');
     table.uuid('permission_id').references('id').inTable('Permissions');
     defaultHistoryFields(knex, table);
-  })
-  await knex.raw(createOnUpdateTrigger(tableName))
+  });
+  await knex.raw(createOnUpdateTrigger(tableName));
 }
-
 
 export async function down(knex: Knex): Promise<void> {
-  await knex.raw(deleteOnUpdateTrigger(tableName))
+  await knex.raw(deleteOnUpdateTrigger(tableName));
   await knex.schema.dropTable(tableName);
 }
-

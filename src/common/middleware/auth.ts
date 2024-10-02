@@ -3,9 +3,10 @@ import { ServiceResponse } from '@/common/models/serviceResponse';
 import { StatusCodes } from 'http-status-codes';
 import { handleServiceResponse } from '@/common/utils/httpHandlers';
 
-const auth = (...requiredPermissions) =>
+const auth =
+  (...requiredPermissions) =>
   async (req: Request, res: Response, next: NextFunction) => {
-    let serviceResponse
+    let serviceResponse;
     try {
       const header = req.headers['authorization'];
       const token = header.split(' ')[1];
@@ -16,9 +17,8 @@ const auth = (...requiredPermissions) =>
       } catch (error) {
         return sendErrorResponse(res, Status.UNAUTHORIZED, 'Invalid token');
       }
-    }
-    catch (err) {
+    } catch (err) {
       serviceResponse = ServiceResponse.failure('Error', err, StatusCodes.BAD_REQUEST);
       return handleServiceResponse(serviceResponse, res);
     }
-  }
+  };

@@ -24,6 +24,11 @@ const config: { [key: string]: Knex.Config } = {
     },
     seeds: {
       directory: './db/seeds'
+    },
+    log: {
+      debug(message) {
+        console.log(message);
+      }
     }
   },
 

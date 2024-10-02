@@ -43,16 +43,16 @@ node_modules/
 .yarn/build-state.yml
 .pnp.*
 
-# Optional npm cache directory
+# Optional npm redis directory
 .npm
 
-# Microbundle cache
+# Microbundle redis
 .rpt2_cache/
 .rts2_cache_cjs/
 .rts2_cache_es/
 .rts2_cache_umd/
 
-# Metro cache
+# Metro redis
 /metro-cache/
 
 # Cache directories for modules
@@ -60,7 +60,7 @@ node_modules/
 .pnp.js
 .pnp.loader.mjs
 
-# TypeScript cache
+# TypeScript redis
 /*.tsbuildinfo
 
 # Optional REPL history
@@ -78,7 +78,7 @@ node_modules/
 .env.production
 .env.*.local
 
-# parcel-bundler cache (https://parceljs.org/)
+# parcel-bundler redis (https://parceljs.org/)
 .cache
 
 # Next.js build output
@@ -93,7 +93,7 @@ node_modules/
 # Serverless directories
 .serverless
 
-# FuseBox cache
+# FuseBox redis
 .fusebox/
 
 # DynamoDB Local files

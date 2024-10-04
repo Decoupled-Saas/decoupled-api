@@ -11,7 +11,6 @@ export async function up(knex: Knex): Promise<void> {
     table.uuid('role_id').references('id').inTable('Roles');
     table.boolean('onboarded').defaultTo(false);
     table.boolean('support_enabled').defaultTo(true);
-
     defaultHistoryFields(knex, table);
   });
   await knex.raw(createOnUpdateTrigger(tableName));

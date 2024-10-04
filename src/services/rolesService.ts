@@ -20,6 +20,16 @@ class RolesService {
   createRole(name: string, description: string) {
     return db('Roles').insert({ name, description });
   }
+
+  findRoleByName(roleName: string) {
+    return db('Roles').where({ name: roleName }).first();
+  }
+
+  async roleHasPermission(role_id: string, permission: string[]) {
+    const permission_data = await db('Permissions').where({ name: permission }).first();
+    console.log(permission_data);
+    return db('RolePermissions').where({ role_id, permission_id: permission_data.id }).first();
+  }
 }
 
 export const rolesService = new RolesService();

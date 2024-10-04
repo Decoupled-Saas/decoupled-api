@@ -18,4 +18,8 @@ iamRouter.post(
   wrapper(iamController.createRole)
 );
 iamRouter.delete('/roles', checkName, wrapper(iamController.deleteRole));
+
+// undocumented to test signing jwt
+iamRouter.get('/jwks', wrapper(iamController.getKeys));
+iamRouter.get('/token', wrapper(iamController.getTestToken));
 export default iamRouter;

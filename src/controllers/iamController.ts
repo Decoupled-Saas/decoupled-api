@@ -4,6 +4,9 @@ import { handleServiceResponse } from '@/common/utils/httpHandlers';
 import { StatusCodes } from 'http-status-codes';
 import { dataValidator } from '@/common/utils/dataValidator';
 import { logger } from '@/common/utils/logger';
+import { tokenService } from '@/services/tokenService';
+import { JWK, JWS } from 'node-jose';
+import moment from 'moment';
 
 class IamController {
   async getRoles(req: Request, res: Response) {
@@ -44,6 +47,64 @@ class IamController {
     logger.info(`Deleting Role name: ${data.name}`);
     await rolesService.deleteRole(data.name);
     const serviceResponse = ServiceResponse.success('Role Deleted', null, StatusCodes.OK);
+    return handleServiceResponse(serviceResponse, res);
+  }
+
+  async getKeys(req: Request, res: Response) {
+    const tokenList = await tokenService.getTokens();
+    const access_keys: any[] = [];
+    const refresh_keys: any[] = [];
+    tokenList.forEach((element: { access_key: any }) => {
+      access_keys.push(element.access_key);
+    });
+    tokenList.forEach((element: { refresh_key: any }) => {
+      refresh_keys.push(element.refresh_key);
+    });
+    const accessKeyStore = await JWK.asKeyStore({ keys: access_keys });
+    const refreshKeyStore = await JWK.asKeyStore({ keys: refresh_keys });
+    const serviceResponse = ServiceResponse.success(
+      'tokens',
+      { access_keys: accessKeyStore.toJSON(), refresh_keys: refreshKeyStore.toJSON() },
+      StatusCodes.OK
+    );
+    return handleServiceResponse(serviceResponse, res);
+  }
+
+  async getTestToken(req: Request, res: Response) {
+    const tokenList = await tokenService.getTokens();
+    const access_keys: any[] = [];
+    const refresh_keys: any[] = [];
+    tokenList.forEach((element: { access_key: any }) => {
+      access_keys.push(element.access_key);
+    });
+    tokenList.forEach((element: { refresh_key: any }) => {
+      refresh_keys.push(element.refresh_key);
+    });
+
+    const aks = { keys: access_keys };
+    const rks = { keys: refresh_keys };
+
+    const accessKeyStore = await JWK.asKeyStore(aks);
+    const refreshKeyStore = await JWK.asKeyStore(rks);
+
+    const [access_key] = accessKeyStore.all({ use: 'sig' });
+    const [refresh_key] = refreshKeyStore.all({ use: 'sig' });
+
+    const access_opt = { compact: true, jwk: access_key, fields: { type: 'jwt' } };
+    const payload = JSON.stringify({
+      exp: moment().add(1, 'days').unix(),
+      iat: moment().unix(),
+      sub: 'test'
+    });
+
+    const access_token = await JWS.createSign(access_opt, access_key).update(payload).final();
+    const refresh_token = await JWS.createSign(access_opt, refresh_key).update(payload).final();
+
+    const serviceResponse = ServiceResponse.success(
+      'test tokens',
+      { access_key: access_token, refresh_key: refresh_token },
+      StatusCodes.OK
+    );
     return handleServiceResponse(serviceResponse, res);
   }
 }

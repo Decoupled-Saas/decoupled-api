@@ -17,7 +17,7 @@ async function main() {
   const accessKey = await accessKeyStore.generate('RSA', 2048, { alg: 'RS256', use: 'sig' });
   const refreshKey = await refreshKeyStore.generate('RSA', 2048, { alg: 'RS256', use: 'sig' });
 
-  await db('JWT').insert({ access_key: accessKey, refresh_key: refreshKey });
+  await db('JWT').insert({ access_key: accessKey.toJSON(true), refresh_key: refreshKey.toJSON(true) });
 
   // eslint-disable-next-line no-console
   console.log(accessKey.toJSON());

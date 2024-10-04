@@ -1,4 +1,6 @@
 import { body, param } from 'express-validator';
+import Joi from 'joi';
+import zxcvbn from 'zxcvbn';
 
 export const checkFirstName = body('first_name').trim().escape();
 export const checkLastName = body('last_name').trim().escape();
@@ -21,4 +23,16 @@ export const checkPass = body(
   pointsForContainingUpper: 10,
   pointsForContainingNumber: 10,
   pointsForContainingSymbol: 10
+});
+
+const passwordBody = Joi.object({
+  password: Joi.string()
+    .required()
+    .custom((val) => {
+      const { score, feedback } = zxcvbn(val);
+      if (score < 2) {
+        throw new Error(`Password is not strong enough. ${feedback.warning}`);
+      }
+      return true;
+    }, 'Password strength validation')
 });

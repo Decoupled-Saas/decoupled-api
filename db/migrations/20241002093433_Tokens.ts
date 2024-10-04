@@ -1,7 +1,7 @@
 import type { Knex } from 'knex';
 import { createOnUpdateTrigger, defaultHistoryFields, deleteOnUpdateTrigger } from '../../src/helpers/utils';
 
-const tableName = 'tableName';
+const tableName = 'Tokens';
 
 export async function up(knex: Knex): Promise<void> {
   await knex.schema.createTable(tableName, (table) => {

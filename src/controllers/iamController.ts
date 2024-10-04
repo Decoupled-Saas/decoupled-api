@@ -7,6 +7,8 @@ import { logger } from '@/common/utils/logger';
 import { tokenService } from '@/services/tokenService';
 import { JWK, JWS } from 'node-jose';
 import moment from 'moment';
+import jwkToPem from 'jwk-to-pem';
+import jwt from 'jsonwebtoken';
 
 class IamController {
   async getRoles(req: Request, res: Response) {
@@ -63,7 +65,7 @@ class IamController {
     const accessKeyStore = await JWK.asKeyStore({ keys: access_keys });
     const refreshKeyStore = await JWK.asKeyStore({ keys: refresh_keys });
     const serviceResponse = ServiceResponse.success(
-      'tokens',
+      'JWKs',
       { access_keys: accessKeyStore.toJSON(), refresh_keys: refreshKeyStore.toJSON() },
       StatusCodes.OK
     );
@@ -106,6 +108,26 @@ class IamController {
       StatusCodes.OK
     );
     return handleServiceResponse(serviceResponse, res);
+  }
+
+  async verifyTestToken(req: Request, res: Response) {
+    const data = dataValidator(req, res);
+    const tokenList = await tokenService.getTokens();
+    const access_keys: any[] = [];
+    tokenList.forEach((element: { access_key: any }) => {
+      access_keys.push(element.access_key);
+    });
+    const [first_key] = access_keys;
+    const public_key = jwkToPem(first_key);
+
+    try {
+      const decoded = jwt.verify(data.access_key, public_key);
+      const serviceResponse = ServiceResponse.success('test tokens validation', decoded, StatusCodes.OK);
+      return handleServiceResponse(serviceResponse, res);
+    } catch (error) {
+      const serviceResponse = ServiceResponse.success('validation failed', error, StatusCodes.BAD_REQUEST);
+      return handleServiceResponse(serviceResponse, res);
+    }
   }
 }
 

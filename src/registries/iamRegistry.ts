@@ -1,9 +1,16 @@
 import { OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
 import { createApiResponse } from '@/api-docs/openAPIResponseBuilders';
 import { z } from 'zod';
-import { iamRoleDeleteSchema, iamRoleSchema } from '@/schemas/iamSchema';
+import {
+  iamGetJWTSchema,
+  iamGetJWTToken,
+  iamPostTestToken,
+  iamPostVerifySchema,
+  iamRoleDeleteSchema,
+  iamRoleSchema,
+  iamTestToken
+} from '@/schemas/iamSchema';
 import { StatusCodes } from 'http-status-codes';
-import { AuthSchema } from '@/schemas/authSchema';
 import { authRegistry } from '@/registries/authRegistry';
 
 export const iamRegistry = new OpenAPIRegistry();
@@ -50,4 +57,34 @@ iamRegistry.registerPath({
     }
   },
   responses: createApiResponse(iamRoleSchema, 'Role Deleted', StatusCodes.OK)
+});
+
+iamRegistry.registerPath({
+  method: 'get',
+  path: '/iam/jwk',
+  tags: ['IAM JWK'],
+  responses: createApiResponse(iamGetJWTSchema, 'JWK', StatusCodes.OK)
+});
+
+iamRegistry.registerPath({
+  method: 'get',
+  path: '/iam/token',
+  tags: ['IAM JWK'],
+  responses: createApiResponse(iamGetJWTToken, 'test tokens', StatusCodes.OK)
+});
+
+iamRegistry.registerPath({
+  method: 'post',
+  path: '/iam/verify',
+  tags: ['IAM JWK'],
+  request: {
+    body: {
+      content: {
+        'application/json': {
+          schema: iamTestToken
+        }
+      }
+    }
+  },
+  responses: createApiResponse(iamPostVerifySchema, 'test tokens validation', StatusCodes.OK)
 });

@@ -13,6 +13,8 @@ class AuthController {
     const data = dataValidator(req, res);
 
     const organisation = await organisationService.create(data.company, data.email);
+    console.log(organisation.id);
+
     const role = await rolesService.findRoleByName('owner');
     const user = await userService.createUser(
       data.first_name,
@@ -30,7 +32,17 @@ class AuthController {
 
   async login(req: Request, res: Response) {
     const data = dataValidator(req, res);
-    const serviceResponse = ServiceResponse.success('User Logged In', data, StatusCodes.OK);
+    let serviceResponse;
+    const user = await userService.loginUserWithEmailAndPassword(data.email, data.password, req.ip);
+    if (!user) {
+      serviceResponse = ServiceResponse.failure('Invalid Credentials', null, StatusCodes.UNAUTHORIZED);
+      return handleServiceResponse(serviceResponse, res);
+    }
+    const organisation = await organisationService.getById(user.default_organisation);
+    const ous = await organisationUserService.findRole(user.id, organisation.id);
+    const tokens = await tokenService.generateAuthTokens(user.id, organisation.id, ous.role_id);
+
+    serviceResponse = ServiceResponse.success('User Logged In', tokens, StatusCodes.OK);
     return handleServiceResponse(serviceResponse, res);
   }
 }

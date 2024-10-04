@@ -12,6 +12,10 @@ class OrganisationUserService {
     }
     return db('OrganisationUsers').insert({ user_id, organisation_id, role_id }).returning('*');
   }
+
+  findRole(user_id: string, organisation_id: string) {
+    return db('OrganisationUsers').where({ user_id, organisation_id }).first();
+  }
 }
 
 export const organisationUserService = new OrganisationUserService();

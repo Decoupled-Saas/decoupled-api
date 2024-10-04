@@ -1,5 +1,6 @@
 import db from '@/common/utils/db';
-import { encryptPassword } from '@/common/utils/encryption';
+import { encryptPassword, isPasswordMatch } from '@/common/utils/encryption';
+import { email } from 'envalid';
 
 class UserService {
   async getUserByEmail(email: string) {
@@ -33,6 +34,20 @@ class UserService {
     });
 
     return this.getUserByEmail(email);
+  }
+
+  async loginUserWithEmailAndPassword(email: string, password: string, ip: string) {
+    const user = await db('Users').where({ email: email }).first();
+    if (!user) {
+      return null;
+    }
+    const isPasswordValid = await isPasswordMatch(password, user.password);
+    if (!isPasswordValid) {
+      return null;
+    }
+    await db('Users').update({ last_ip_address: ip, last_login_at: 'now()' }).where({ email: email });
+    const { password: userPassword, ...userWithoutPassword } = user;
+    return userWithoutPassword;
   }
 }
 

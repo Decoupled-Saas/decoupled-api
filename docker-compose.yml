@@ -16,7 +16,7 @@ services:
       - db-data:/var/lib/postgresql/data
 
   mailpit:
-    image: axllent/mailpit
+    image: axllent/mailpit@sha256:b004cc0672d0692f097ba8ab9e5956ae08eeafee3d0a6bf2ab239750101ac538
     container_name: decoupled-mailpit
     logging:
       driver: 'none' # disable saving logs
@@ -27,7 +27,7 @@ services:
   pgweb:
     container_name: pgweb
     restart: always
-    image: sosedoff/pgweb
+    image: sosedoff/pgweb@sha256:8f1ed22e10c9da0912169b98b62ddc54930dc39a5ae07b0f1354d2a93d44c6ed
     ports:
       - '8081:8081'
     links:
@@ -39,7 +39,7 @@ services:
       - postgres
 
   redis-1:
-    image: redis:latest
+    image: redis:latest@sha256:f0957bcaa75fd58a9a1847c1f07caf370579196259d69ac07f2e27b5b389b021
     command: ['redis-server', '/etc/redis/redis.conf']
     ports:
       - 6379:6379

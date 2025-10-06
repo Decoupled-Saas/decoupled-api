@@ -805,10 +805,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/figlet@npm:1.5.8":
-  version: 1.5.8
-  resolution: "@types/figlet@npm:1.5.8"
-  checksum: 10c0/b61385ca7d7c7716a7ee63d421b24d851fbe9ea43e67a746e0f90212fa6502fe9e34bf5b5e6761c363b828cd87eb953fc55b2f48bfe2801c309e0077230474c3
+"@types/figlet@npm:1.7.0":
+  version: 1.7.0
+  resolution: "@types/figlet@npm:1.7.0"
+  checksum: 10c0/d33a07727e35d6b9ccb47c863d2d9c84b6cd23d2935cf904c495fce687558c842063a7e01176c03a354a2f40f2781004cce66ae446462e5f73c4ee23d7956daa
   languageName: node
   linkType: hard
 
@@ -1940,7 +1940,7 @@ __metadata:
     "@types/cors": "npm:2.8.17"
     "@types/express": "npm:5.0.0"
     "@types/express-redis-cache": "npm:1.1.5"
-    "@types/figlet": "npm:1.5.8"
+    "@types/figlet": "npm:1.7.0"
     "@types/jsonwebtoken": "npm:9.0.7"
     "@types/jwk-to-pem": "npm:2.0.3"
     "@types/mocha": "npm:10.0.8"

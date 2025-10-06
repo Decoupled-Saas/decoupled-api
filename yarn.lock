@@ -729,10 +729,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/chai@npm:5.0.0":
-  version: 5.0.0
-  resolution: "@types/chai@npm:5.0.0"
-  checksum: 10c0/fcce55f2bbb8485fc860a1dcbac17c1a685b598cfc91a55d37b65b1642b921cf736caa8cce9dcc530830d900f78ab95cf43db4e118db34a5176f252cacd9e1e8
+"@types/chai@npm:5.2.2":
+  version: 5.2.2
+  resolution: "@types/chai@npm:5.2.2"
+  dependencies:
+    "@types/deep-eql": "npm:*"
+  checksum: 10c0/49282bf0e8246800ebb36f17256f97bd3a8c4fb31f92ad3c0eaa7623518d7e87f1eaad4ad206960fcaf7175854bdff4cb167e4fe96811e0081b4ada83dd533ec
   languageName: node
   linkType: hard
 
@@ -760,6 +762,13 @@ __metadata:
   dependencies:
     "@types/node": "npm:*"
   checksum: 10c0/457364c28c89f3d9ed34800e1de5c6eaaf344d1bb39af122f013322a50bc606eb2aa6f63de4e41a7a08ba7ef454473926c94a830636723da45bf786df032696d
+  languageName: node
+  linkType: hard
+
+"@types/deep-eql@npm:*":
+  version: 4.0.2
+  resolution: "@types/deep-eql@npm:4.0.2"
+  checksum: 10c0/bf3f811843117900d7084b9d0c852da9a044d12eb40e6de73b552598a6843c21291a8a381b0532644574beecd5e3491c5ff3a0365ab86b15d59862c025384844
   languageName: node
   linkType: hard
 
@@ -1500,16 +1509,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chai@npm:5.1.1":
-  version: 5.1.1
-  resolution: "chai@npm:5.1.1"
+"chai@npm:5.2.2":
+  version: 5.2.2
+  resolution: "chai@npm:5.2.2"
   dependencies:
     assertion-error: "npm:^2.0.1"
     check-error: "npm:^2.1.1"
     deep-eql: "npm:^5.0.1"
     loupe: "npm:^3.1.0"
     pathval: "npm:^2.0.0"
-  checksum: 10c0/e7f00e5881e3d5224f08fe63966ed6566bd9fdde175863c7c16dd5240416de9b34c4a0dd925f4fd64ad56256ca6507d32cf6131c49e1db65c62578eb31d4566c
+  checksum: 10c0/96d51ab0162b77c70ddf6b69de78e4f7af5969bd07a76003d1ffa8f48c8896a76470fe1575a973275bbad10f8d751d59869dfb041091b2cc060d7a4d0725dc7a
   languageName: node
   linkType: hard
 
@@ -1935,7 +1944,7 @@ __metadata:
   dependencies:
     "@asteasolutions/zod-to-openapi": "npm:^7.3.4"
     "@types/bcryptjs": "npm:2.4.6"
-    "@types/chai": "npm:5.0.0"
+    "@types/chai": "npm:5.2.2"
     "@types/compression": "npm:1.7.5"
     "@types/cors": "npm:2.8.17"
     "@types/express": "npm:5.0.0"
@@ -1952,7 +1961,7 @@ __metadata:
     "@types/zxcvbn": "npm:4.4.5"
     app-root-path: "npm:^3.1.0"
     bcryptjs: "npm:^2.4.3"
-    chai: "npm:5.1.1"
+    chai: "npm:5.2.2"
     chalk: "npm:4.1.2"
     commander: "npm:12.1.0"
     compression: "npm:^1.7.4"

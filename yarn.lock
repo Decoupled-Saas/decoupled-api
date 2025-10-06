@@ -1978,7 +1978,7 @@ __metadata:
     express: "npm:^4.21.0"
     express-rate-limit: "npm:^7.4.0"
     express-redis-cache: "npm:^1.1.3"
-    express-validator: "npm:^7.2.0"
+    express-validator: "npm:^7.2.1"
     figlet: "npm:1.7.0"
     helmet: "npm:^8.0.0"
     http-status-codes: "npm:^2.3.0"
@@ -2761,13 +2761,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"express-validator@npm:^7.2.0":
-  version: 7.2.0
-  resolution: "express-validator@npm:7.2.0"
+"express-validator@npm:^7.2.1":
+  version: 7.2.1
+  resolution: "express-validator@npm:7.2.1"
   dependencies:
     lodash: "npm:^4.17.21"
     validator: "npm:~13.12.0"
-  checksum: 10c0/3197fdbe5e2f574432d11f5e2c7a367ef6473534c158f96d849a2426130d835076c3dd87d11483fe1932001e188eabac3aa9b0485c7944cf12fea10fc31cde3d
+  checksum: 10c0/f859b29ecfb0b5bcdd608e2593bbb928a144d5cf0ead7832c8c496c87edf880b79b812a204544c96ad88e25d4beea6f5fd78cfba138e5d80e7c4cd97a87ea15e
   languageName: node
   linkType: hard
 

@@ -79,7 +79,7 @@
     "eslint-plugin-simple-import-sort": "12.1.1",
     "figlet": "1.7.0",
     "inquirer": "11.1.0",
-    "lint-staged": "15.2.10",
+    "lint-staged": "15.2.11",
     "mocha": "10.7.3",
     "ora": "8.1.0",
     "pino-http": "10.3.0",
